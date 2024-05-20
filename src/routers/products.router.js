@@ -21,31 +21,47 @@ productsRouter.post('/products', async (req, res, next) => {
 });
 
 // 상품 목록 조회 (READ)
-productsRouter.post('/products', async (req, res, next) => {});
-//DB에서 조회하기(생성일시 기준 내림차순 정렬)
-//완료 메세지 반환하기
+productsRouter.get('/products', async (req, res, next) => {
+  //DB에서 조회하기(생성일시 기준 내림차순 정렬)
+  const data = await Product.find().sort({ createdAt: 'desc' }).exec();
+
+  //완료 메세지 반환하기
+  return res
+    .status(200)
+    .json({ status: 200, message: '상품 목록 조회에 성공했습니다.', data });
+});
 
 // 상품 상세 조회 (READ)
-productsRouter.post('/products', async (req, res, next) => {});
-//상품 ID 파싱하기
-//DB에서 조회하기
-//완료 메세지 반환하기
+productsRouter.get('/products/:id', async (req, res, next) => {
+  //상품 ID 파싱하기
+  const { id } = req.params;
+
+  //DB에서 조회하기
+  const data = await Product.findById(id).exec();
+
+  //완료 메세지 반환하기
+  return res
+    .status(200)
+    .json({ status: 200, message: '상품 상세 조회에 성공했습니다.', data });
+});
 
 // 상품 수정 (UPDATE)
-productsRouter.post('/products', async (req, res, next) => {});
-//상품 ID 파싱하기
-//상품 수정 정보 파싱하기
-//DB에 조회하기 (비밀번호 포함)
-//비밀번호 일치 여부 확인
-//Db에 갱신하기
-//완료 메세지 반환하기
+productsRouter.patch('/products', async (req, res, next) => {
+  //상품 ID 파싱하기
+  //상품 수정 정보 파싱하기
+  //DB에 조회하기 (비밀번호 포함)
+  //비밀번호 일치 여부 확인
+  //Db에 갱신하기
+  //완료 메세지 반환하기
+});
 
 // 상품 삭제 (DELETE)
-productsRouter.post('/products', async (req, res, next) => {});
-//상품 ID 파싱하기
-//DB에 조회하기 (비밀번호 포함)
-//비밀번호 일치 여부 확인
-//Db에서 삭제하기
-//완료 메세지 반환하기
+productsRouter.delete('/products', async (req, res, next) => {
+  //상품 ID 파싱하기
+  //DB에 조회하기 (비밀번호 포함)
+  //비밀번호 일치 여부 확인
+  //Db에서 삭제하기
+  //완료 메세지 반환하기
+});
 
 export { productsRouter };
