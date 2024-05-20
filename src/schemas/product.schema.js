@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { PRODUCT_STATUS } from '../constants/product.constant';
+import { PRODUCT_STATUS } from '../constants/product.constant.js';
 
 const productSchema = new mongoose.Schema(
   {
@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    desciption: {
+    description: {
       type: String,
       required: true,
     },
@@ -19,6 +19,7 @@ const productSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      //select 설정 시 find명령어에서만 가능
       select: false,
     },
     status: {
@@ -27,7 +28,7 @@ const productSchema = new mongoose.Schema(
       default: PRODUCT_STATUS.FOR_SALE,
     },
   },
-  { timestamps: true, toJSON: { virtuals: true } }
+  { timestamps: true, toJSON: { virtual: true } }
 );
 
-export const Product = mongoose.model((name = 'Product'), productSchema);
+export const Product = mongoose.model('Product', productSchema);
