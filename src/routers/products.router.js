@@ -12,8 +12,6 @@ productsRouter.post(
   createProductValidator,
   async (req, res, next) => {
     try {
-      await joiSchema.validateAsync(req.body);
-
       //상품 정보 파싱하기 (구조분해 할당)
       const { name, description, manager, password } = req.body;
 
